@@ -68,45 +68,39 @@ File: `app.rb`
 ```ruby
 require 'sinatra'
 
-# Add these two lines below if you're on the Learn IDE!
-# set :bind, ENV["HOST_IP"]
-# set :port, ENV["HOST_PORT"]
-
 get '/' do
   "Hello, World!"
 end
 ```
 
->Note: If you're using the Learn IDE, there are two lines in this file that you will need to uncomment to get this to work!
+You could start this web application by running `ruby app.rb`. 
 
-You could start this web application by running `ruby app.rb`. You'll see something similar to:
 
-```
-$ ruby app.rb
-== Sinatra (v1.4.6) has taken the stage on 4567 for development with backup from Thin
-Thin web server (v1.6.3 codename Protein Powder)
-Maximum connections set to 1024
-Listening on localhost:4567, CTRL+C to stop
-```
+>NOTE: In cloud9, you need to include two more pieces of information: the **port** and the **IP** address using the `-p` and `-o` flags, respectively.  For cloud9, the numbers are dynamic and are stored in the variables `$PORT` and `$IP`.  So to correctly run in the app in cloud9, you should type `ruby app.rb -p $PORT -o $IP`
 
->Note: If you're using the Learn IDE, that last line will look more like this: `Listening on 192.241.134.186:30000, CTRL+C to stop` and you'll have to navigate to the address shown (in this case: `192.241.134.186:30000`) to see your site!
-
-This is telling us that Sinatra has started a web application running on your computer listening to HTTP requests at port `4567`, the Sinatra default. If you start this application and navigate to http://localhost:4567 you'll see "Hello, World!" in your browser. Go back to your terminal running the Sinatra application and stop it by typing `CTRL+C`. You should see:
+You'll see something similar to:
 
 ```
-Listening on localhost:4567, CTRL+C to stop
-^CStopping ...
-Stopping ...
-== Sinatra has ended his set (crowd applauds)
-[00:01:11] (wip-lesson) what-is-sinatra
+$ ruby app.rb -p $PORT -o $IP
+[2017-02-02 20:52:31] INFO  WEBrick 1.3.1
+[2017-02-02 20:52:31] INFO  ruby 2.3.0 (2015-12-25) [x86_64-linux]
+== Sinatra (v1.4.8) has taken the stage on 8080 for development with backup from WEBrick
+[2017-02-02 20:52:31] INFO  WEBrick::HTTPServer#start: pid=3199 port=8080 
+```
+
+
+This is telling us that Sinatra has started a web application running on your computer listening to HTTP requests at port `8080`. If you start this application and navigate to `https://ruby-YOURUSERNAME.c9users.io` (shown in the green bubble) you'll see "Hello, World!" in your browser. Go back to your terminal running the Sinatra application and stop it by typing `CTRL+C`. You should see:
+
+```
+^C== Sinatra has ended his set (crowd applauds)
+[2017-02-02 20:54:16] INFO  going to shutdown ...
+[2017-02-02 20:54:16] INFO  WEBrick::HTTPServer#start done.
 $
 ```
 
-This is the most basic Sinatra application structure and is actually pretty uncommon. More commonly, Sinatra is used in a modular style encapsulated by Controller Classes and booted via the `config.ru` Rack convention.
+This is the most basic Sinatra application structure and is actually pretty uncommon. More commonly, Sinatra is used in a modular style encapsulated by Controller Classes and booted via the `config.ru` Rack convention.  More on that later.
 
 ## Resources
 
 * [Blake Mizerany - Ruby Learning Interview](http://rubylearning.com/blog/2009/08/11/blake-mizerany-how-do-i-learn-and-master-sinatra/)
 * [Companies Using Sinatra](http://www.sinatrarb.com/wild.html)
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/what-is-sinatra' title='What is Sinatra?'>What is Sinatra?</a> on Learn.co and start learning to code for free.</p>
