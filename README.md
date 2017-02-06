@@ -1,41 +1,32 @@
-# What is Sinatra?
+# Sinatra Overview
 
 ## Overview
 
-We'll introduce you to the concept of web frameworks and Sinatra in particular. You'll make sure Sinatra is installed in your computer and run a simple web application with it. 
+Now that you understand the MVC structure in general, let's get acquainted with one specific example: Sinatra.  We'll make sure Sinatra is installed and then run a simple web application with it. 
 
 ## Objectives
 
-1. Differentiate between a website and a web application
-2. Describe how Web Frameworks like Sinatra simplify web application development through common patterns and conventions
+1. Understand what routes are.
+2. Describe Sinatra.
 3. Distinguish between Sinatra and Rails
 4. Install Sinatra on your computer
 5. Run a basic Sinatra application
 
 
-## Web Applications
+## Routes
+Throughout this reading, you will see the word **route**.  Similar to how Google Maps might give you a route from point A to point B, as developers of a full-stack web applications, you need to make routes that describe exactly what happens when a user goes somewhere.  It can be split up into two categories: **GET** and **POST**.
 
-How does Twitter have different pages for each of its 300 million users? How can AirBnB support over 40 million guests with over 1.5 million listings worldwide? All of this is possible because of web applications.
+In short, a route that includes a `get` request means the user is trying to access a specific URL, i.e. "get"ting something.
 
-## What's a Web Framework?
+This is going to be slightly different than a route involving a `post` request, where the user typically submits a form in order to move on to another page.
 
-> A web application framework (WAF) is a software framework that is designed to support the development of dynamic websites, web applications, web services and web resources. The framework aims to alleviate the overhead associated with common activities performed in web development. [Wikipedia](https://en.wikipedia.org/wiki/Web_application_framework)
-
-Building dynamic web applications in any language is a complex job requiring intimate knowledge of hundreds of technologies and specifications. The good news, however, is that many of these requirements are universal and every web application must conform to these standards.
-
-For example, any robust web application will need to handle request routing and provide a mechanism for the application to respond to different URLs with the appropriate response. Even a simple blog application has to handle a request to GET '/posts' to show all the recent blog posts vs a request to GET '/authors' to list all the authors.
-
-Similarly, web applications require the ability to render templates to produce consistently structured dynamic content. A GET request to `/posts/1` must render the HTML for the first post just as a request to GET '/posts/2' will render identically structured HTML but with content for the second post. This is possible because of templates.
-
-Web frameworks take all these routine and common requirements of any web application and abstract them into code and patterns that provide these functionalities to your application without requiring you to build them yourself.
-
-Frameworks provide structure and libraries that allow you to focus on **your** application and not **applications in general**. The bigger the framework, the more you can rely on it to provide you with common needs. The smaller the framework, the more you'll have to build things yourself.
+Either way, there might be backend stuff that needs to happen in between **the user trying to get somewhere** and **where they actually end up**.  For example, when a user signs into a webpage, they type in their information and press 'Sign in' (which is a `post` request), and a specific **route** (in the Controller) takes their information and uses the Model(s) in the backend to decide which View to load and help inject the custom information.  Like Google Maps, all of those step-by-step directions are called a 'route'.  Sometimes they are simple, and sometimes they are complex.  It just depends on what you want to do.
 
 ## What is Sinatra?
 
-Sinatra is a Domain Specific Language implemented in Ruby that's used for writing web applications. Created by [Blake Mizerany](https://github.com/bmizerany),  Sinatra is Rack-based, which means it can fit into any Rack-based application stack, including Rails. It's used by companies such as Apple, BBC, GitHub, LinkedIn, and more.
+Sinatra is a **D**omain **S**pecific **L**anguage (`rspec` is another example of a DSL) implemented in Ruby that's used for writing web applications. Created by [Blake Mizerany](https://github.com/bmizerany),  Sinatra is Rack-based, which means it can fit into any Rack-based application stack, including Rails. It's used by companies such as Apple, BBC, GitHub, LinkedIn, and more.
 
-Essentially, Sinatra is nothing more than some pre-written methods that we can include in our applications to turn them into Ruby web applications.
+Essentially, Sinatra is nothing more than some pre-written methods that we can include in our applications to turn them into Ruby web applications.  In a way, it is similar to how Bootstrap is nothing more than some pre-written CSS classes that you can include in your HTML.
 
 Unlike Ruby on Rails, which is a Full Stack Web Development Framework that provides everything needed from front to back, Sinatra is designed to be lightweight and flexible.  Sinatra is designed to provide you with the bare minimum requirements and abstractions for building simple and dynamic Ruby web applications.
 
@@ -43,7 +34,7 @@ In addition to being a great tool for certain projects, Sinatra is a great way t
 
 ## Why Sinatra Before Rails
 
-We've all heard of "Ruby on Rails" and how powerful it is. You can build impressive web applications in mere hours! How amazing. Most people, when they learn Rails for the first time, literally say "It's like magic!". But we're developers, and we know that magic isn't real and that other smart developers just built an impressive framework.
+Maybe you've heard of "Ruby on Rails" and how powerful it is. You can build impressive web applications in mere hours! How amazing. Most people, when they learn Rails for the first time, literally say "It's like magic!". But we're developers, and we know that magic isn't real and that other smart developers just built an impressive framework.
 
 That means it's important to understand the basic concepts of Rails before diving into Rails itself. **Enter Sinatra.**
 
@@ -62,7 +53,7 @@ Any application that requires the `sinatra` library will get access to methods l
 
 First, make sure Sinatra is installed by running `gem install sinatra` in your terminal.
 
-The simplest Sinatra application would be:
+Here is the simplest Sinatra application we could write:
 
 File: `app.rb`
 ```ruby
@@ -73,8 +64,7 @@ get '/' do
 end
 ```
 
-You could start this web application by running `ruby app.rb`. 
-
+Typically, you could start this web application by running `ruby app.rb`. 
 
 >NOTE: In cloud9, you need to include two more pieces of information: the **port** and the **IP** address using the `-p` and `-o` flags, respectively.  For cloud9, the numbers are dynamic and are stored in the variables `$PORT` and `$IP`.  So to correctly run in the app in cloud9, you should type `ruby app.rb -p $PORT -o $IP`
 
@@ -89,7 +79,14 @@ $ ruby app.rb -p $PORT -o $IP
 ```
 
 
-This is telling us that Sinatra has started a web application running on your computer listening to HTTP requests at port `8080`. If you start this application and navigate to `https://ruby-YOURUSERNAME.c9users.io` (shown in the green bubble) you'll see "Hello, World!" in your browser. Go back to your terminal running the Sinatra application and stop it by typing `CTRL+C`. You should see:
+This is telling us that Sinatra has started a web application running on your computer listening to HTTP requests at port `8080`. If you start this application and navigate to `https://ruby-YOURUSERNAME.c9users.io/` (shown in the green bubble) you'll see "Hello, World!" in your browser. 
+
+So what does the code mean?
+* `require 'sinatra'` is utilizing the sinatra gem that we just installed.
+* `get '/'` is setting up a route that handles `get` requests to `/`.  When a user loads `https://ruby-YOURUSERNAME.c9users.io/` in a new tab, they are essentially requesting to **get** something from the server running at `ruby-YOURUSERNAME.c9users.io`, and the path to where they want to go is simply the `/` at the end.  
+* Inside of the `do`/`end`, here is where we specify the actual steps to be taken.  In the future, we will have multiple steps, usually ending in loading a **view**, but this example simply loads the string "Hello World".
+
+Go back to your terminal running the Sinatra application and stop it by typing `CTRL+C`. You should see:
 
 ```
 ^C== Sinatra has ended his set (crowd applauds)
@@ -97,6 +94,8 @@ This is telling us that Sinatra has started a web application running on your co
 [2017-02-02 20:54:16] INFO  WEBrick::HTTPServer#start done.
 $
 ```
+
+WHOA!  We just ran our first web application!  See, wasn't that easy?
 
 This is the most basic Sinatra application structure and is actually pretty uncommon. More commonly, Sinatra is used in a modular style encapsulated by Controller Classes and booted via the `config.ru` Rack convention.  More on that later.
 
