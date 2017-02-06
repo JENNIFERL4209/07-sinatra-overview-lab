@@ -20,7 +20,7 @@ In short, a route that includes a `get` request means the user is trying to acce
 
 This is going to be slightly different than a route involving a `post` request, where the user typically submits a form in order to move on to another page.
 
-Either way, there might be backend stuff that needs to happen in between **the user trying to get somewhere** and **where they actually end up**.  For example, when a user signs into a webpage, they type in their information and press 'Sign in' (which is a `post` request), and a specific **route** (in the Controller) takes their information and uses the Model(s) in the backend to decide which View to load and help inject the custom information.  Like Google Maps, all of those step-by-step directions are called a 'route'.  Sometimes they are simple, and sometimes they are complex.  It just depends on what you want to do.
+Either way, there might be backend stuff that needs to happen in between **the user trying to go somewhere** and **where they actually end up**.  For example, when a user signs into a webpage, they type in their information and press 'Sign in' (which is a `post` request), and a specific **route** (in the Controller) takes their information and uses the Model(s) in the backend to decide which View to load and help inject the custom information.  Like Google Maps, all of those step-by-step directions are called a 'route'.  Sometimes they are simple, and sometimes they are complex.  It just depends on what you want to do.
 
 ## What is Sinatra?
 
